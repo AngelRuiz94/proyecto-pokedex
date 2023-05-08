@@ -1,1 +1,22 @@
-<p>home-poke works!</p>
+<div class="container" *ngIf="pokemon">
+  <h1>{{ pokemon.name }}</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <img [src]="pokemon.sprites?.front_default" alt="Imagen del Pokémon" class="img-fluid">
+    </div>
+    <div class="col-md-8">
+      <ul class="list-group">
+        <li class="list-group-item">Tipo: {{ pokemon.types }}</li>
+        <li class="list-group-item">Altura: {{ pokemon.height }}</li>
+        <li class="list-group-item">Peso: {{ pokemon.weight }}</li>
+      </ul>
+    </div>
+  </div>
+  <form>
+    <div class="form-group">
+      <label for="pokemonId">ID del Pokémon:</label>
+      <input type="number" class="form-control" id="pokemonId" [(ngModel)]="pokemonId" name="pokemonId">
+    </div>
+    <button type="button" class="btn btn-primary" (click)="getPokemon()">Buscar</button>
+  </form>
+</div>
