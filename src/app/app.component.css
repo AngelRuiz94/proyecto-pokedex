@@ -1,0 +1,21 @@
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(244, 244, 244, 0.3);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
