@@ -1,5 +1,6 @@
 export const environment = {
     production: false,
+    baseUrl: 'https://pokeapi.co/api/v2/',
     firebase: {
         apiKey: "AIzaSyB6w5_yRsjFA5h8NJE_22ko-PI_AviwBag",
         authDomain: "pokedex-firebase-9614c.firebaseapp.com",

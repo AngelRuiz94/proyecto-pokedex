@@ -1,19 +1,34 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomePokeComponent } from './components/home-poke/home-poke.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-// import { AngularFireModule } from '@angular/fire';
+import { AngularFireModule } from '@angular/fire/compat';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
+import { PokeHomeComponent } from './components/poke-home/poke-home.component';
+import { PokeListComponent } from './components/poke-list/poke-list.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RegisterUserComponent } from './components/register/register-user.component';
+import { VerifyMailComponent } from './components/verify/verify-mail.component';
+import { RecoverPasswordComponent } from './components/recover/recover-password.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePokeComponent
+    PokeHomeComponent,
+    PokeListComponent,
+    DashboardComponent,
+    LoginComponent,
+    RegisterUserComponent,
+    VerifyMailComponent,
+    RecoverPasswordComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -21,9 +36,12 @@ import { environment } from 'src/environments/environment';
     HttpClientModule,
     FormsModule,
     ButtonModule,
-    // AngularFireModule.initializeApp(environment.firebase)
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,11 +3,11 @@ import { ApiPokeService } from '../../service/api-poke.service';
 import { Pokemon } from '../../interfaces/pokemon';
 
 @Component({
-  selector: 'app-home-poke',
-  templateUrl: './home-poke.component.html',
-  styleUrls: ['./home-poke.component.css']
+  selector: 'app-poke-list',
+  templateUrl: './poke-list.component.html',
+  styleUrls: ['./poke-list.component.css']
 })
-export class HomePokeComponent {
+export class PokeListComponent {
 
   pokemon?: Pokemon;
   pokemonId?: number;
