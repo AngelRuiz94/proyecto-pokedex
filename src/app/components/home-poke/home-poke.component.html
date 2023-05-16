@@ -1,5 +1,12 @@
 <div class="container" *ngIf="pokemon">
   <ng-container>
+    <form>
+      <div class="form-group">
+        <label for="pokemonId">ID del Pokémon:</label>
+        <input type="number" class="form-control" id="pokemonId" [(ngModel)]="pokemonId" name="pokemonId">
+      </div>
+      <p-button class="btn btn-primary" (click)="getPokemon()">Buscar</p-button>
+    </form>
     <h1>{{ pokemon.name }}</h1>
     <div class="row">
       <div class="col-md-4">
@@ -13,13 +20,6 @@
         </ul>
       </div>
     </div>
-    <form>
-      <div class="form-group">
-        <label for="pokemonId">ID del Pokémon:</label>
-        <input type="number" class="form-control" id="pokemonId" [(ngModel)]="pokemonId" name="pokemonId">
-      </div>
-      <p-button class="btn btn-primary" (click)="getPokemon()">Buscar</p-button>
-    </form>
+    <div class="pie-de-pagina">hola</div>
   </ng-container>
-  <div class="pie-de-pagina">hola</div>
 </div>

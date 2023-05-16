@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePokeComponent } from './home-poke/home-poke.component';
+import { HomePokeComponent } from './components/home-poke/home-poke.component';
 
 const routes: Routes = [
   { path: 'homePoke', component: HomePokeComponent }
