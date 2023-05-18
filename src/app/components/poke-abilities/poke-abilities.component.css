@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(244, 244, 244, 0.3);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .pie-de-pagina {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  }
