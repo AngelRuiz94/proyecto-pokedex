@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ApiPokeService } from '../../service/api-poke.service';
 import { Pokemon } from '../../interfaces/pokemon';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-poke-details',
@@ -13,8 +15,20 @@ export class PokeDetailsComponent {
   pokemonId?: number;
 
   constructor(
-    private pokedexService: ApiPokeService
-    ) {}
+    private pokedexService: ApiPokeService,
+    private afAuth: AngularFireAuth,
+    private router: Router
+    ) {
+      /* SESIONES */
+      this.afAuth.authState.subscribe(user => {
+        if (user) {
+          this.router.navigate(['/pokeHome/pokeDetails'])
+  
+        } else {
+          this.router.navigate(['/login'])
+        }
+      })
+    }
 
   ngOnInit(): void {
     this.getPokemonId(25);

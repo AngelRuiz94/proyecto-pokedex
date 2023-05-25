@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   login() {
     const email = this.loginUsuario.value.email;
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.afAuth.signInWithEmailAndPassword(email, password).then((user) => {
       if(user.user?.emailVerified) {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/pokeHome']);
       } else {
         this.router.navigate(['/verify-mail']);
       }

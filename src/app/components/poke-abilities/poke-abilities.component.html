@@ -1,25 +1,22 @@
+<app-navigation></app-navigation>
 <div class="container" *ngIf="pokemon">
-  <ng-container>
-    <form>
-      <div class="form-group">
-        <label for="pokemonId">ID del Pokémon:</label>
-        <input type="number" class="form-control" id="pokemonId" [(ngModel)]="pokemonId" name="pokemonId">
-      </div>
-      <p-button class="btn btn-primary" (click)="getPokemon()">Buscar</p-button>
-    </form>
-    <h1>{{ pokemon.name }}</h1>
-    <div class="row">
-      <div class="col-md-4">
-        <img [src]="pokemon.sprites?.front_default" alt="Imagen del Pokémon" class="img-fluid">
-      </div>
-      <div class="col-md-8">
-        <ul class="list-group">
-          <li class="list-group-item">Tipo: {{ pokemon.types }}</li>
-          <li class="list-group-item">Altura: {{ pokemon.height }}</li>
-          <li class="list-group-item">Peso: {{ pokemon.weight }}</li>
-        </ul>
-      </div>
-    </div>
-    <div class="pie-de-pagina">hola</div>
-  </ng-container>
+    <ng-container>
+        <p-table [value]="pokeAbility" [paginator]="true" [rows]="5" styleClass="p-datatable-striped"
+            [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>URL</th>
+                    <th>Pokemon</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-pAbility>
+                <tr>
+                    <td>{{pAbility.name}}</td>
+                    <td>{{pAbility.url}}</td>
+                    <td>{{'Ej: ' + pAbility.pokemon.pokemon[0].pokemon.name}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </ng-container>
 </div>

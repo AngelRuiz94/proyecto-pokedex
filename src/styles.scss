@@ -2,23 +2,23 @@
 @import './assets/colors.scss';
 
 body {
-  font-size: 16px; /* tamaño de fuente predeterminado */
+  font-size: 16px;
   background-color: #333;
-  font-family: 'Open Sans', sans-serif; // fuente predeterminada
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-size: 1.2rem; /* anular el tamaño de fuente predeterminado para encabezados */
-  font-family: 'Montserrat', sans-serif; // fuente para encabezados
+  font-size: 1.2rem; 
+  font-family: 'Montserrat', sans-serif;
 }
 
 .button {
   background-color: $primary-color;
   color: #fff;
   margin: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); // sombra para botones
-  border-radius: 5px; // bordes redondeados
-  padding: 10px 20px; // relleno uniforme
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  padding: 10px 20px;
 }
 
 .alert {
@@ -27,31 +27,29 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .container {
-  max-width: 80%; // ancho máximo del contenedor
-  margin: 0 auto; // centrar el contenedor horizontalmente
+  max-width: 80%;
+  margin: 0 auto;
   margin-top: 10px;
 }
 
 .section {
-  padding: 50px 0; // espaciado uniforme para secciones
+  padding: 50px 0;
 }
 
 .form-control {
   margin-bottom: 10px;
-  border: 1px solid #ccc; // borde para campos de formulario
-  border-radius: 5px; // bordes redondeados
-  padding: 10px; // relleno uniforme
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .background {
   background-image: url('./assets/img/pokeball-background.png');
-  background-repeat: repeat;
-  background-size: 10%;
-  transform-origin: 0 0; /* establece el punto de origen de la rotación en la esquina superior izquierda del elemento */
-  position: fixed; /* fija el contenedor en la pantalla */
-  width: 100%; /* ajusta el ancho del contenedor para que ocupe todo el ancho del viewport */
-  height: 100%; /* ajusta la altura del contenedor para que ocupe todo el alto del viewport */
-  overflow: hidden; /* oculta cualquier parte de la imagen que se salga del contenedor */
-  z-index: -1; /* Coloca el elemento por detrás del resto del contenido */
-  opacity: 0.05; /* aplica una transparencia del 50% a la imagen */
+  background-size: 8%;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  opacity: 0.05;
   }
