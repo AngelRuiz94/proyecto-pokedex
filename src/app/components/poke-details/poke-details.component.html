@@ -1,26 +1,58 @@
 <app-navigation></app-navigation>
 <div class="container" *ngIf="pokemon">
-  <ng-container>
-    <form>
-      <div class="form-group">
+  <ng-container class="secondContainer">
+    
+    <h1>{{ pokemon.name }}</h1>
+
+    <div>
+      <div>
         <label for="pokemonId">ID del Pokémon:</label>
-        <input type="number" class="form-control" id="pokemonId" [(ngModel)]="pokemonId" name="pokemonId">
+        <p-inputNumber class="form-control" id="pokemonId" [(ngModel)]="pokemonId" name="pokemonId" [min]="0" [max]="1500"></p-inputNumber>
       </div>
       <p-button class="btn btn-primary" (click)="getPokemon()">Buscar</p-button>
-    </form>
-    <h1>{{ pokemon.name }}</h1>
+    </div>
+
+
     <div class="row">
       <div class="col-md-4">
-        <img [src]="pokemon.sprites?.front_default" alt="Imagen del Pokémon" class="img-fluid">
+        <img [src]="pokemon.sprites?.front_default" alt="Imagen del Pokémon">
       </div>
       <div class="col-md-8">
         <ul class="list-group">
-          <li class="list-group-item">Tipo: {{ pokemon.types }}</li>
+          <li class="list-group-item">Id: {{ pokemon.id}}</li>
+          <div *ngIf="pokemon.types.length != 1; else elseBlock">
+            <li class="list-group-item">
+              Tipos: 
+              <ng-container *ngFor="let tp of pokemon.types">
+                {{ tp.type?.name }}
+              </ng-container>
+            </li>
+          </div>
+          <ng-template #elseBlock>
+            <li class="list-group-item">
+              <ng-container *ngFor="let tp of pokemon.types">
+                Tipo: {{ tp.type?.name}}
+              </ng-container>
+            </li>
+          </ng-template>
           <li class="list-group-item">Altura: {{ pokemon.height }}</li>
           <li class="list-group-item">Peso: {{ pokemon.weight }}</li>
+          <ng-container *ngFor="let ab of abilities">
+            <div *ngIf="ab.is_hidden; else elseBlock">
+              <li class="list-group-item">Habilidad oculta: {{ ab.name}}</li>
+            </div>
+            <ng-template #elseBlock>
+              <li class="list-group-item">Habilidad: {{ ab.name}}</li>
+            </ng-template>
+          </ng-container>
+          <ng-container *ngFor="let st of stats">
+            <li class="list-group-item">{{ st.name}}: {{ st.base_stat}}</li>
+          </ng-container>
         </ul>
       </div>
     </div>
+
+    <div id="container" #container></div>
     <div class="pie-de-pagina">hola</div>
   </ng-container>
 </div>

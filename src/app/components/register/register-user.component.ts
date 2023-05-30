@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { FirebaseCodeErrorService } from 'src/app/service/firebase-code-error.service';
+import { FirebaseCodeErrorService } from 'src/app/service/firebase-errors.service';
 
 @Component({
   selector: 'app-register-user',

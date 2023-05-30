@@ -9,9 +9,11 @@ import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { SpinnerComponent } from './spinner/spinner.component';
+import * as _Highcharts from "highcharts";
 //Components
 import { PokeHomeComponent } from './components/poke-home/poke-home.component';
 import { PokeListComponent } from './components/poke-list/poke-list.component';
@@ -47,6 +49,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     ButtonModule,
     TableModule,
     CardModule,
+    InputNumberModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,

@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: 'pokeHome/pokeNature', component: PokeNatureComponent },
   { path: 'pokeHome/pokeAbilities', component: PokeAbilitiesComponent },
   // Login
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  // { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'pokeHome/pokeDetails', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registerUser', component: RegisterUserComponent },
   { path: 'verifyMail', component: VerifyMailComponent },
