@@ -17,11 +17,13 @@ export class ApiPokeService {
     private http: HttpClient
   ) { }
 
+  //Pokemon
   getPokemonId(id: number): Observable<Pokemon> {
     this.url = `${this.baseUrl}pokemon/${id}`;
     return this.http.get<Pokemon>(this.url);
   }
 
+  //Placeholder
   getPokemon(): Observable<any> {
     this.url = `${this.baseUrl}pokemon/25`;
     return this.http.get(this.url);
@@ -52,6 +54,15 @@ export class ApiPokeService {
     return this.http.get<Pokemon>(pokeUrl);
   }
 
-  
+  // Nature
+  getNature(): Observable<any> {
+    this.url = `${this.baseUrl}nature?offset=0&limit=${this.limit}`;
+    return this.http.get(this.url);
+  }
+
+  getNatureFromList(natureUrl: string): Observable<PokeAbility> {
+    console.log(natureUrl);
+    return this.http.get<PokeAbility>(natureUrl);
+  }
 
 }

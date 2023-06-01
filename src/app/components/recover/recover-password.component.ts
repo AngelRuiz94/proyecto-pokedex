@@ -43,4 +43,15 @@ export class RecoverPasswordComponent implements OnInit {
         this.toastr.error(this.firebaseError.codeError(error.code), 'Error');
       });
   }
+
+  emailRequired() {
+    let required = (this.recuperarUsuario.get('email')?.hasError('required') && this.recuperarUsuario.get('email')?.touched) ? true : false;
+    return required;
+  }
+
+  emailInvalid() {
+    let invalid = (this.recuperarUsuario.get('email')?.hasError('email') && this.recuperarUsuario.get('email')?.touched) ? true : false;
+    return invalid;
+  }
+
 }

@@ -10,6 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { SpinnerComponent } from './spinner/spinner.component';
@@ -50,6 +51,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     TableModule,
     CardModule,
     InputNumberModule,
+    InputTextModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,

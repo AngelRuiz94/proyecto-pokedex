@@ -46,4 +46,19 @@ export class LoginComponent implements OnInit {
       this.toastr.error(this.firebaseError.codeError(error.code), 'Error');
     })
   }
+
+  emailRequired() {
+    let required = (this.loginUsuario.get('email')?.hasError('required') && this.loginUsuario.get('email')?.touched) ? true : false;
+    return required;
+  }
+
+  emailInvalid() {
+    let invalid = (this.loginUsuario.get('email')?.hasError('email') && this.loginUsuario.get('email')?.touched) ? true : false;
+    return invalid;
+  }
+
+  passwordInvalid() {
+    let passInvalid = (this.loginUsuario.get('password')?.hasError('required') && this.loginUsuario.get('password')?.touched) ? true : false;
+    return passInvalid;
+  }
 }

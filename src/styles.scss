@@ -1,47 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
 @import './assets/colors.scss';
 
+html {
+  height: 100%
+}
+
 body {
   font-size: 16px;
   background-color: #333;
   font-family: 'Open Sans', sans-serif;
+  min-height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-size: 1.2rem; 
+  font-size: 1.2rem;
   font-family: 'Montserrat', sans-serif;
 }
 
-.button {
-  background-color: $primary-color;
-  color: #fff;
-  margin: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+p-button {
+  margin: 0.5rem, 1rem, 0.5rem, 1rem;
   border-radius: 5px;
   padding: 10px 20px;
 }
 
 .alert {
   background-color: $warning-color;
-  color: #fff;
+  color: #ff0000;
 }
 
 .container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  background-color: rgba(244, 244, 244, 0.3);
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
   max-width: 80%;
   margin: 0 auto;
   margin-top: 10px;
+  // width: 40%;
 }
-
-.section {
-  padding: 50px 0;
-}
-
-// .form-control {
-//   margin-bottom: 10px;
-//   border: 1px solid #ccc;
-//   border-radius: 5px;
-//   padding: 10px;
-// }
 
 .background {
   background-image: url('./assets/img/pokeball-background.png');
@@ -52,5 +54,96 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   z-index: -1;
   opacity: 0.05;
-  }
-  
+}
+
+// Forms
+.input-element {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+input {
+  width: 50%;
+}
+
+.p-input-icon-left {
+  width: 100%;
+}
+
+.text-danger {
+  color: $danger-color !important;
+  font-size: 14px;
+}
+
+.contentSize {
+  width: 90%;
+}
+
+form {
+  text-align: center;
+}
+
+.pie-de-pagina {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+// .p-col, .p-col-1, .p-col-3, .p-col-4,
+// .p-col-5, .p-col-6, .p-col-7, .p-col-8,
+// .p-col-9, .p-col-10, .p-col-11, .p-col-12 {
+//   display: block
+// }
+
+// Cols
+.p-col {
+  width: 100%;
+}
+
+.p-col-1 {
+  width: 8.333%;
+}
+
+.p-col-2 {
+  width: 16.666%;
+}
+
+.p-col-3 {
+  width: 25%;
+}
+
+.p-col-4 {
+  width: 33.333%;
+}
+
+.p-col-5 {
+  width: 41.666%;
+}
+
+.p-col-6 {
+  width: 50%;
+}
+
+.p-col-7 {
+  width: 58.333%;
+}
+
+.p-col-8 {
+  width: 66.666%;
+}
+
+.p-col-9 {
+  width: 75%;
+}
+
+.p-col-10 {
+  width: 83.333%;
+}
+
+.p-col-11 {
+  width: 91.666%;
+}
+
+.p-col-12 {
+  width: 100%;
+}

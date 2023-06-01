@@ -7,6 +7,6 @@ export const environment = {
         projectId: "pokedex-firebase-9614c",
         storageBucket: "pokedex-firebase-9614c.appspot.com",
         messagingSenderId: "602096973806",
-        appId: "1:602096973806:web:1234567890abcdef" // El valor real puede variar
+        appId: "1:602096973806:web:1234567890abcdef"
     }
-  };
+};

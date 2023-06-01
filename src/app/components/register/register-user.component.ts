@@ -67,4 +67,25 @@ export class RegisterUserComponent implements OnInit {
         this.router.navigate(['/login']);
       });
   }
+
+  emailRequired() {
+    let required = (this.registrarUsuario.get('email')?.hasError('required') && this.registrarUsuario.get('email')?.touched) ? true : false;
+    return required;
+  }
+
+  emailInvalid() {
+    let invalid = (this.registrarUsuario.get('email')?.hasError('email') && this.registrarUsuario.get('email')?.touched) ? true : false;
+    return invalid;
+  }
+
+  passwordRequired() {
+    let passRequired = (this.registrarUsuario.get('password')?.hasError('required') && this.registrarUsuario.get('password')?.touched) ? true : false;
+    return passRequired;
+  }
+
+  passwordMinLength() {
+    let passMinLength = (this.registrarUsuario.get('password')?.hasError('minlength') && this.registrarUsuario.get('password')?.touched) ? true : false;
+    return passMinLength;
+  }
+
 }

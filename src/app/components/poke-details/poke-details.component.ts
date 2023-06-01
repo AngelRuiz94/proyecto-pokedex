@@ -29,7 +29,7 @@ export class PokeDetailsComponent {
       this.afAuth.authState.subscribe(user => {
         if (user) {
           this.router.navigate(['/pokeHome/pokeDetails'])
-  
+
         } else {
           // this.router.navigate(['/login'])
         }
@@ -63,64 +63,91 @@ export class PokeDetailsComponent {
             }
             this.stats?.push(stat);
           }
+          setTimeout(() => {
+            if (this.pokemon) {
+              this.generateChart(this.pokemon);
+            }
+          },100);
+        });
+  }
 
-          Highcharts.chart(this.chartEl?.nativeElement, {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Monthly Average Rainfall'
-            },
-            subtitle: {
-                text: 'Source: WorldClimate.com'
-            },
-            xAxis: {
-                categories: [
-                    'Jan',
-                    'Feb',
-                    'Mar',
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec'
-                ],
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Rainfall (mm)'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: 'Tokyo',
-                type: 'line',
-                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
-                    194.1, 95.6, 54.4]
-        
-            }]
-        });
-      
-        });
+  generateChart(pokemon: Pokemon) {
+
+    Highcharts.chart(this.chartEl?.nativeElement, {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: pokemon.name
+      },
+      tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+          '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+      },
+      plotOptions: {
+        column: {
+          pointPadding: 0.2,
+          borderWidth: 0
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      series: [{
+        name: 'HP',
+        type: 'column',
+        data: [
+          this.getStats(0)
+        ]
+      },{
+        name: 'Attack',
+        type: 'column',
+        data: [
+          this.getStats(1)
+        ]
+      },{
+        name: 'Defense',
+        type: 'column',
+        data: [
+          this.getStats(2)
+        ]
+      },{
+        name: 'Sp. Attack',
+        type: 'column',
+        data: [
+          this.getStats(3)
+        ]
+      },{
+        name: 'Sp. Defense',
+        type: 'column',
+        data: [
+          this.getStats(4)
+        ]
+      },{
+        name: 'Speed',
+        type: 'column',
+        data: [
+          this.getStats(5)
+        ]
+      },
+    ]
+  });
+
+  }
+
+  getStats(position: number) {
+    let stats: Array<number> = [];
+    if (this.pokemon) {
+      for (let stat of this.pokemon.stats) {
+          stats.push(stat.base_stat);
+      }
+    }
+    console.log(stats);
+    return stats[position];
   }
 
   // Pasándole
