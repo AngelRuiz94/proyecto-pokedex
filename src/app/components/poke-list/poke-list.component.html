@@ -1,19 +1,14 @@
 <app-navigation></app-navigation>
-<div class="container" *ngIf="pokemon">
-    <ng-container>
-    <p-table [value]="pokeList" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
-      <ng-template pTemplate="header">
-          <tr>
-              <th>Name</th>
-              <th>URL</th>
-          </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-pList>
-          <tr>
-              <td>{{pList.name}}</td>
-              <td>{{pList.url}}</td>
-          </tr>
-      </ng-template>
-  </p-table>
-  </ng-container>
+<div class="pokemon-grid">
+  <div class="box" [ngStyle]="{'background-color':color}" *ngFor="let pokemon of pokemons | paginate: { itemsPerPage: itemsPerPage, currentPage: page, totalItems: totalPokemons }">
+    <img [src]="pokemon.sprites.front_default" alt="Pokemon">
+    <h3>{{ pokemon.name }}</h3>
+    <p>
+      <b>Type:</b> {{pokemon.types[0].type.name}}
+      <ng-container *ngIf="pokemon.types[1]" !="null">
+        {{pokemon.types[1].type.name}}
+      </ng-container>
+    </p>
+  </div>
 </div>
+<pagination-controls (pageChange)="page = $event; pokemons = []; getPokemons()"></pagination-controls>

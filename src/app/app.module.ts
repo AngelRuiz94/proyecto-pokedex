@@ -12,6 +12,7 @@ import { CardModule } from 'primeng/card';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { environment } from 'src/environments/environment';
 import { SpinnerComponent } from './spinner/spinner.component';
 import * as _Highcharts from "highcharts";
@@ -52,6 +53,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     CardModule,
     InputNumberModule,
     InputTextModule,
+    NgxPaginationModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,

@@ -1,9 +1,18 @@
 <app-navigation></app-navigation>
 <div class="container" *ngIf="pokemon">
-  <ng-container >
-    <p-card *ngFor="let nature of natures" [header]="nature.name" [subheader]="nature.increased_stat.name">
-      <img [src]="nature.pokemon[0].pokemon.url" alt="Pokemon Image" class="pokemon-image" />
-      <p>{{ nature.pokemon[0].pokemon.name }}</p>
+  <h1>Natures</h1>
+  <div class="cards">
+    <p-card *ngFor="let nat of natures" [header]="nat.name">
+      <!-- <div *ngFor=""></div> -->
+      <div *ngIf="nat.decreased_stat == null && nat.increased_stat == null; else elseBlock">
+        Neutra
+      </div>
+      <ng-template #elseBlock>
+        <div>
+          <p>{{'Decrease: ' + nat.decreased_stat.name}}</p>
+          <p>{{'Increased: ' + nat.increased_stat.name}}</p>
+        </div>
+      </ng-template>
     </p-card>
-  </ng-container>
+  </div>
 </div>

@@ -1,4 +1,4 @@
 export interface PokeList {
-    name?: string;
-    url?: string;
-  }
+  name?: string;
+  url?: string;
+}

@@ -39,19 +39,20 @@ export class ApiPokeService {
     return this.http.get(this.url);
   }
 
-  getAbilityFromList(abilityUrl: string): Observable<PokeAbility> {
-    console.log(abilityUrl);
-    return this.http.get<PokeAbility>(abilityUrl);
-  }
-
-  // PokeList
-  getPokeList(): Observable<any> {
-    this.url = `${this.baseUrl}pokemon?offset=0&limit=${this.limit}`;
+  getAbilityToList(name: string) {
+    this.url = `${this.baseUrl}ability/${name}`;
     return this.http.get(this.url);
   }
 
-  getPokeFromList(pokeUrl: string): Observable<Pokemon> {
-    return this.http.get<Pokemon>(pokeUrl);
+  // PokeList
+  getPokeList(limit: number, offset: number): Observable<any> {
+    this.url = `${this.baseUrl}pokemon?limit=${limit}&offset=${offset}`;
+    return this.http.get(this.url);
+  }
+
+  getPokeToList(name: string) {
+    this.url = `${this.baseUrl}pokemon/${name}`;
+    return this.http.get(this.url);
   }
 
   // Nature
@@ -60,8 +61,7 @@ export class ApiPokeService {
     return this.http.get(this.url);
   }
 
-  getNatureFromList(natureUrl: string): Observable<PokeAbility> {
-    console.log(natureUrl);
+  getNatureToList(natureUrl: string): Observable<PokeAbility> {
     return this.http.get<PokeAbility>(natureUrl);
   }
 

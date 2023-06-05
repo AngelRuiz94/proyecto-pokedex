@@ -1,7 +1,9 @@
 import { Pokemon } from "./pokemon";
 
 export interface PokeAbility {
-    name?: string;
-    url?: string;
-    pokemon?: Pokemon;
-  }
+  id?: number;
+  name?: string;
+  name_es?: string;
+  effect?: string;
+  pokemon?: string;
+}

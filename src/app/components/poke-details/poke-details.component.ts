@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { ApiPokeService } from '../../service/api-poke.service';
 import { Pokemon } from '../../interfaces/pokemon';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -18,19 +18,21 @@ export class PokeDetailsComponent {
   pokemonId?: number;
   abilities?: Array<Ability> = [];
   stats?: Array<Stat> = [];
+  color?: string;
   @ViewChild('container') public chartEl?: ElementRef;
 
   constructor(
     private pokedexService: ApiPokeService,
     private afAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private renderer: Renderer2
     ) {
       /* SESIONES */
       this.afAuth.authState.subscribe(user => {
         if (user) {
           this.router.navigate(['/pokeHome/pokeDetails'])
 
-        } else {
+        // } else {
           // this.router.navigate(['/login'])
         }
       })
@@ -42,8 +44,7 @@ export class PokeDetailsComponent {
 
   // Pasándole un ID
   getPokemonId(id: number): void {
-    this.pokedexService.getPokemonId(id)
-      .subscribe(
+    this.pokedexService.getPokemonId(id).subscribe(
         result$ => {
           this.pokemon = result$;
           console.log(this.pokemon);
@@ -65,6 +66,7 @@ export class PokeDetailsComponent {
           }
           setTimeout(() => {
             if (this.pokemon) {
+              this.changeColor();
               this.generateChart(this.pokemon);
             }
           },100);
@@ -80,63 +82,91 @@ export class PokeDetailsComponent {
       title: {
         text: pokemon.name
       },
-      tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-          '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-      },
       plotOptions: {
         column: {
           pointPadding: 0.2,
-          borderWidth: 0
+          borderWidth: 0,
+        },
+        series: {
+          dataLabels: {
+            enabled: true
+          }
         }
+      },
+      xAxis: {
+        categories: [
+          'HP',
+          'Attack',
+          'Defense',
+          'Sp. Attack',
+          'Sp. Defense',
+          'Speed'
+        ]
       },
       credits: {
         enabled: false
       },
       series: [{
-        name: 'HP',
+        label: {
+          enabled: false,
+        },
         type: 'column',
+        color: this.changeColor(),
         data: [
-          this.getStats(0)
-        ]
-      },{
-        name: 'Attack',
-        type: 'column',
-        data: [
-          this.getStats(1)
-        ]
-      },{
-        name: 'Defense',
-        type: 'column',
-        data: [
-          this.getStats(2)
-        ]
-      },{
-        name: 'Sp. Attack',
-        type: 'column',
-        data: [
-          this.getStats(3)
-        ]
-      },{
-        name: 'Sp. Defense',
-        type: 'column',
-        data: [
-          this.getStats(4)
-        ]
-      },{
-        name: 'Speed',
-        type: 'column',
-        data: [
+          this.getStats(0),
+          this.getStats(1),
+          this.getStats(2),
+          this.getStats(3),
+          this.getStats(4),
           this.getStats(5)
+
         ]
-      },
+      }
     ]
   });
 
+  }
+
+  changeColor() {
+    if (this.pokemon.types[0].type.name == "normal") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--normal');
+    } else if (this.pokemon.types[0].type.name == "fighting") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--fighting');
+    } else if (this.pokemon.types[0].type.name == "flying") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--flying');
+    } else if (this.pokemon.types[0].type.name == "poison") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--poison');
+    } else if (this.pokemon.types[0].type.name == "ground") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--ground');
+    } else if (this.pokemon.types[0].type.name == "rock") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--rock');
+    } else if (this.pokemon.types[0].type.name == "bug") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--bug');
+    } else if (this.pokemon.types[0].type.name == "ghost") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--ghost');
+    } else if (this.pokemon.types[0].type.name == "steel") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--steel');
+    } else if (this.pokemon.types[0].type.name == "fire") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--fire');
+    } else if (this.pokemon.types[0].type.name == "water") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--water');
+    } else if (this.pokemon.types[0].type.name == "grass") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--grass');
+    } else if (this.pokemon.types[0].type.name == "electric") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--electric');
+    } else if (this.pokemon.types[0].type.name == "psychic") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--psychic');
+    } else if (this.pokemon.types[0].type.name == "ice") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--ice');
+    } else if (this.pokemon.types[0].type.name == "dragon") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--dragon');
+    } else if (this.pokemon.types[0].type.name == "dark") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--dark');
+    } else if (this.pokemon.types[0].type.name == "fairy") {
+      this.color = getComputedStyle(document.documentElement).getPropertyValue('--fairy');
+    }
+    console.log(this.color);
+    return this.color;
   }
 
   getStats(position: number) {
@@ -150,18 +180,15 @@ export class PokeDetailsComponent {
     return stats[position];
   }
 
-  // Pasándole
-  // getPokemon() {
-  //   this.pokedexService.getPokemon()
-  //     .subscribe((data: any) => {
-  //       this.pokemon = data;
-  //       console.log(this.pokemon);
-  //     });
-  // }
-
   getPokemon(): void {
     if (this.pokemonId) {
-    this.pokedexService.getPokemonId(this.pokemonId).subscribe(pokemon => this.pokemon = pokemon);
+    this.pokedexService.getPokemonId(this.pokemonId).subscribe(
+      result$ =>{
+        this.pokemon = result$;
+        this.generateChart(this.pokemon);
+        this.changeColor();
+      }
+      );
     }
   }
 

@@ -4,6 +4,8 @@ import { Pokemon } from '../../interfaces/pokemon';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { PokeNature } from 'src/app/interfaces/pokeNature';
+import { Nature } from 'src/app/interfaces/nature';
 
 @Component({
   selector: 'app-poke-nature',
@@ -14,7 +16,8 @@ export class PokeNatureComponent {
 
   pokemon?: Pokemon;
   pokemonId?: number;
-  natures: any[] = [];
+  naturelist?: PokeNature[] = [];
+  natures?: Nature[] = [];
 
   constructor(
     private pokedexService: ApiPokeService,
@@ -26,62 +29,44 @@ export class PokeNatureComponent {
       this.afAuth.authState.subscribe(user => {
         if (user) {
           this.router.navigate(['/pokeHome/pokeNature'])
-  
+
         } else {
           this.router.navigate(['/login'])
         }
       })
-    }
+      // GET NATURE LIST
+    this.pokedexService.getNature().subscribe(
+      result$ => {
+        this.naturelist = result$.results;
+        console.log(this.naturelist);
+        this.getNatureToList();
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.getPokemonId(25);
-    this.fetchNatures();
   }
 
   // Pasándole un ID
   getPokemonId(id: number): void {
     this.pokedexService.getPokemonId(id).subscribe(
-      pokemon => this.pokemon = pokemon);
-  }
-
-  fetchNatures() {
-    const natureUrl = 'https://pokeapi.co/api/v2/nature/';
-
-    // Realizar la petición GET a la API
-    this.http.get<any>(natureUrl).subscribe(
-      (response) => {
-        this.natures = response.results;
-        this.getAdditionalNatureInfo();
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
-
-  getAdditionalNatureInfo() {
-    for (const nature of this.natures) {
-      this.http.get<any>(nature.url).subscribe(
-        (response) => {
-          nature.increased_stat = response.increased_stat;
-          this.getPokemonInfo(nature);
-        },
-        (error) => {
-          console.error(error);
-        }
+      pokemon => this.pokemon = pokemon
       );
-    }
   }
 
-  getPokemonInfo(nature: any) {
-    this.http.get<any>(nature.pokemon.url).subscribe(
-      (response) => {
-        nature.pokemon = response.pokemon;
-      },
-      (error) => {
-        console.error(error);
+  getNatureToList(): void {
+    for (let pokeNat of this.naturelist) {
+      if (pokeNat.url) {
+        this.pokedexService.getNatureToList(pokeNat.url).subscribe(
+          result$ => {
+            pokeNat.nature = result$;
+            this.natures.push(pokeNat.nature);
+          }
+        )
       }
-    );
+    }
+    console.log(this.natures);
   }
-  
+
 }

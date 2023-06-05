@@ -15,6 +15,8 @@ export class PokeAbilitiesComponent {
   pokemon?: Pokemon;
   pokeAbility: Array<PokeAbility> = [];
   pokemonId?: number;
+  abilities?: any[] = [];
+  totalAbilities?: number;
 
   constructor(
     private pokedexService: ApiPokeService,
@@ -25,7 +27,7 @@ export class PokeAbilitiesComponent {
       this.afAuth.authState.subscribe(user => {
         if (user) {
           this.router.navigate(['/pokeHome/pokeAbilities'])
-  
+
         } else {
           this.router.navigate(['/login'])
         }
@@ -36,50 +38,44 @@ export class PokeAbilitiesComponent {
       //   pokemon => this.pokemon = pokemon);
       // }
       // GET POKEMON LIST
-      this.pokedexService.getAbility().subscribe(
-        result$ => {
-          if (result$) {
-            this.pokeAbility = result$.results;
-            console.log(this.pokeAbility)
-            this.getPokemonToList();
+      setTimeout(() => {
+        this.pokedexService.getAbility().subscribe(
+          result$ => {
+            // this.totalAbilities = result$.count;
+            this.totalAbilities = 298;
+            result$.results.forEach((result$: any) => {
+              this.pokedexService.getAbilityToList(result$.name)
+              .subscribe((oneResult$) =>{
+                this.abilities.push(oneResult$);
+              })
+            });
+            // console.log('Entra');
+            // console.log(this.abilities);
+            // for (let ab of this.abilities) {
+            //   console.log('No entra');
+            //   let ability: PokeAbility = {};
+            //   ability.id = ab.id;
+            //   ability.name = ab.name;
+            //   for (let name_lang of ab.names) {
+            //     if (name_lang == 'es') {
+            //       ability.name_es = name_lang;
+            //     }
+            //   }
+            //   if (ab.pokemon) {
+            //     ability.pokemon = ab.pokemon[0].pokemon.name;
+            //   }
+            //   console.log(ability);
+            //   this.pokeAbility.push(ability);
+            // }
+            // this.pokeAbility = this.pokeAbility.sort((a, b) => a.id - b.id);
+            // console.log(this.pokeAbility);
+            this.abilities = this.abilities.sort((a, b) => a.order - b.order);
+            console.log(this.abilities);
           }
-        }
-      )
+        )
+      }, 200);
     }
 
   ngOnInit(): void {
-    this.getPokemonId(25);
   }
-
-  // Pasándole un ID
-  getPokemonId(id: number): void {
-    this.pokedexService.getPokemonId(id).subscribe(
-      pokemon => this.pokemon = pokemon);
-  }
-
-  getPokemonToList(): void {
-    for (let pokeAb of this.pokeAbility) {
-      if (pokeAb.url) {
-        this.pokedexService.getPokemonToList(pokeAb.url).subscribe(
-          result$ => {
-            pokeAb.pokemon = result$;
-            console.log(pokeAb);
-          }
-        )
-      }
-    }
-  }
-
-  // getAbilityFromList(url: string) {
-  //   let ability: any;
-  //   this.pokedexService.getAbilityFromList(url).subscribe(
-  //     result$ => {
-  //       if (result$) {
-  //         ability = result$;
-  //         console.log(ability);
-  //       }
-  //     }
-  //   )
-  //   return ability.names[5].name;
-  // }
 }

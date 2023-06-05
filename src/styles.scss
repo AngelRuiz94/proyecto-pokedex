@@ -83,10 +83,19 @@ form {
   text-align: center;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+}
+
 .pie-de-pagina {
   position: fixed;
   bottom: 0;
   right: 0;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 // .p-col, .p-col-1, .p-col-3, .p-col-4,

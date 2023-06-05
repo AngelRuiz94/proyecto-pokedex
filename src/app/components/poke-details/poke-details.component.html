@@ -2,74 +2,55 @@
 <div class="container" *ngIf="pokemon">
   <div class="p-col">
     <div class="p-col" style="text-align: center">
-      <div>
         <label for="pokemonId">ID </label>
         <p-inputNumber class="form-control" id="pokemonId" [(ngModel)]="pokemonId" name="pokemonId" [min]="0" [max]="1500"></p-inputNumber>
         <p-button class="btn btn-primary" (click)="getPokemon()">Buscar</p-button>
-      </div>
     </div>
-    <div class="p-col-4" style="display: inline-flex; justify-content: center;">
-      <div class="p-col">
-        <h1 style="text-align: center;">#{{ pokemon.id }}{{ pokemon.name }}</h1>
-        <img [src]="pokemon.sprites?.front_default" width="80%" height="80%" alt="Imagen del Pokémon">
+
+    <div class="p-col">
+      <div class="p-col-4 inline-block" style="justify-content: center;">
+      <!-- <div class="p-col-4 inline-block" style="justify-content: center;" [ngStyle]="{'background-color':color}"> -->
+        <div class="p-col" style="align-items: center;">
+          <h1 style="text-align: center;">#{{ pokemon.id }}{{ pokemon.name }}</h1>
+          <div class="image">
+            <img [src]="pokemon.sprites?.front_default" alt="Imagen del Pokémon">
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="p-col-8" style="display: inline-flex;">
-      <div class="p-col" style="display: inline-block;">
-        <!-- <div class="col-md-8"> -->
-          <tr>
-            <!-- <th>Id: {{ pokemon.id}}</th> -->
-            <div class="grid flex-column">
-              <div class="p-col">
-                  <div class="box">
-                    <div *ngIf="pokemon.types.length != 1; else elseBlock">
-                      <td>
-                        Tipos:
-                        <ng-container *ngFor="let tp of pokemon.types">
-                          {{ tp.type?.name }}
-                        </ng-container>
-                      </td>
-                    </div>
-                    <ng-template #elseBlock>
-                      <td>
-                        <ng-container *ngFor="let tp of pokemon.types">
-                          Tipo: {{ tp.type?.name}}
-                        </ng-container>
-                      </td>
-                    </ng-template>
-                  </div>
-              </div>
-              <div class="p-col">
-                  <div class="box">
-                    <td>Altura: {{ pokemon.height }}</td>
-                  </div>
-              </div>
-              <div class="p-col">
-                  <div class="box">
-                    <td>Peso: {{ pokemon.weight }}</td>
-                  </div>
-              </div>
-              <div class="p-col">
-                  <div class="box">
-                    <ng-container *ngFor="let ab of abilities">
-                      <div *ngIf="ab.is_hidden; else elseBlock">
-                        <td>Habilidad oculta: {{ ab.name}}</td>
-                      </div>
-                      <ng-template #elseBlock>
-                        <td>Habilidad: {{ ab.name}}</td>
-                      </ng-template>
-                    </ng-container>
-                  </div>
-              </div>
-            </div>
-            <!-- <ng-container *ngFor="let st of stats">
-              <td>{{ st.name}}: {{ st.base_stat}}</td>
-            </ng-container> -->
-          </tr>
-        <!-- </div> -->
+
+      <div class="p-col-8 inline-block">
+        <div class="cosas">
+          <div class="grid">
+            <ng-container *ngIf="pokemon.types.length != 1; else elseBlock">
+              <td>
+                Types:
+                <ng-container *ngFor="let tp of pokemon.types">
+                  {{ tp.type?.name }}
+                </ng-container>
+              </td>
+            </ng-container>
+            <ng-template #elseBlock>
+              <td>
+                <ng-container *ngFor="let tp of pokemon.types">
+                  Type: {{ tp.type?.name}}
+                </ng-container>
+              </td>
+            </ng-template>
+            <td>Height: {{ pokemon.height }}</td>
+            <td>Weight: {{ pokemon.weight }}</td>
+            <ng-container *ngFor="let ab of abilities">
+              <ng-container *ngIf="ab.is_hidden; else elseBlock">
+                <td>Hidden ability: {{ ab.name}}</td>
+              </ng-container>
+              <ng-template #elseBlock>
+                <td>Ability: {{ ab.name}}</td>
+              </ng-template>
+            </ng-container>
+          </div>
+          <div class="cosas3">
+            <div id="container" style="width: 600px; height: 250px;" #container></div>
+          </div>
       </div>
-      <div class="p-col"style="display: inline-block;">
-        <div id="container" #container></div>
       </div>
     </div>
   </div>
