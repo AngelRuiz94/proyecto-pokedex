@@ -66,7 +66,7 @@ export class PokeDetailsComponent {
           }
           setTimeout(() => {
             if (this.pokemon) {
-              this.changeColor();
+              // this.changeColor();
               this.generateChart(this.pokemon);
             }
           },100);
@@ -186,7 +186,7 @@ export class PokeDetailsComponent {
       result$ =>{
         this.pokemon = result$;
         this.generateChart(this.pokemon);
-        this.changeColor();
+        // this.changeColor();
       }
       );
     }

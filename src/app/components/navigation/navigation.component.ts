@@ -16,12 +16,12 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  logOut() {
+  signOut() {
     this.afAuth.signOut().then(() => {
       this.router.navigate(['/login']);
     } );
     this.afAuth.signOut().then(function () {
-      console.log('Salir');
+      console.log('Saliendo...');
       window.location.reload();
     }).catch(function (error) {
       console.log(error);

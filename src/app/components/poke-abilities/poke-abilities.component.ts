@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class PokeAbilitiesComponent {
 
+  loading: boolean = false;
   pokemon?: Pokemon;
   pokeAbility: Array<PokeAbility> = [];
   pokemonId?: number;
@@ -32,50 +33,25 @@ export class PokeAbilitiesComponent {
           this.router.navigate(['/login'])
         }
       })
-      // GET POKEMON
-      // if (this.pokemonId) {
-      // this.pokedexService.getPokemonId(this.pokemonId).subscribe(
-      //   pokemon => this.pokemon = pokemon);
-      // }
-      // GET POKEMON LIST
-      setTimeout(() => {
-        this.pokedexService.getAbility().subscribe(
-          result$ => {
-            // this.totalAbilities = result$.count;
-            this.totalAbilities = 298;
-            result$.results.forEach((result$: any) => {
-              this.pokedexService.getAbilityToList(result$.name)
-              .subscribe((oneResult$) =>{
-                this.abilities.push(oneResult$);
-              })
-            });
-            // console.log('Entra');
-            // console.log(this.abilities);
-            // for (let ab of this.abilities) {
-            //   console.log('No entra');
-            //   let ability: PokeAbility = {};
-            //   ability.id = ab.id;
-            //   ability.name = ab.name;
-            //   for (let name_lang of ab.names) {
-            //     if (name_lang == 'es') {
-            //       ability.name_es = name_lang;
-            //     }
-            //   }
-            //   if (ab.pokemon) {
-            //     ability.pokemon = ab.pokemon[0].pokemon.name;
-            //   }
-            //   console.log(ability);
-            //   this.pokeAbility.push(ability);
-            // }
-            // this.pokeAbility = this.pokeAbility.sort((a, b) => a.id - b.id);
-            // console.log(this.pokeAbility);
-            this.abilities = this.abilities.sort((a, b) => a.order - b.order);
-            console.log(this.abilities);
-          }
-        )
-      }, 200);
     }
 
   ngOnInit(): void {
+    // GET POKEMON LIST
+    setTimeout(() => {
+      this.pokedexService.getAbility().subscribe(
+        result$ => {
+          // this.totalAbilities = result$.count;
+          this.totalAbilities = 298;
+          result$.results.forEach((result$: any) => {
+            this.pokedexService.getAbilityToList(result$.name)
+            .subscribe((oneResult$) =>{
+              this.abilities.push(oneResult$);
+            })
+          });
+          this.abilities = this.abilities.sort((a, b) => a.id - b.id);
+          console.log(this.abilities);
+        }
+      )
+    }, 1000);
   }
 }

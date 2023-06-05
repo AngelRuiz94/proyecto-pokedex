@@ -56,6 +56,7 @@ export class PokeNatureComponent {
   }
 
   getNatureToList(): void {
+    this.natures = [];
     for (let pokeNat of this.naturelist) {
       if (pokeNat.url) {
         this.pokedexService.getNatureToList(pokeNat.url).subscribe(

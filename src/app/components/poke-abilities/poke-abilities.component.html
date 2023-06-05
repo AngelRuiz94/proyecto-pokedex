@@ -1,43 +1,52 @@
 <app-navigation></app-navigation>
 <div class="container">
-    <ng-container>
-        <p-table [value]="abilities" [rows]="totalAbilities" styleClass="p-datatable-striped"
-            [tableStyle]="{'min-width': '50rem'}">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Effect</th>
-                    <th>Pokemon</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-ability>
-                <tr>
-                  <!-- <td>{{ ability.id }}</td>
-                  <td>{{ ability.name }} ({{ ability.name_es }})</td>
-                  <td>{{ ability.effect }}</td>
-                  <td>{{ ability.pokemon }}</td> -->
-                    <td>{{ability.id}}</td>
-                    <ng-container *ngIf="ability.name; else elseBlock">
-                      <td>{{ability.name}} ({{ability.names[5].name}})</td>
+  <ng-container *ngIf="!loading">
+      <p-table [value]="abilities" [rows]="totalAbilities" styleClass="p-datatable-striped"
+          [tableStyle]="{'min-width': '50rem'}">
+          <ng-template pTemplate="header">
+              <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Effect</th>
+                  <th>Pokemon</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-ability>
+              <tr>
+                <!-- <td>{{ ability.id }}</td>
+                <td>{{ ability.name }} ({{ ability.name_es }})</td>
+                <td>{{ ability.effect }}</td>
+                <td>{{ ability.pokemon }}</td> -->
+                  <td>{{ability.id}}</td>
+                  <td>
+                  <ng-container *ngIf="ability.name; else elseName">
+                    {{ability.name}}
+                    <ng-container *ngIf="ability.names[3] && ability.names[3].language.name == 'es'">
+                      ({{ability.names[3].name}})
                     </ng-container>
-                    <ng-template #elseBlock>
-                      <td style="text-align: center;">-</td>
-                    </ng-template>
-                    <ng-container *ngIf="ability.effect_entries[1]; else elseBlock">
-                      <td>{{ability.effect_entries[1].effect}}</td>
+                    <ng-container *ngIf="ability.names[5] && ability.names[5].language.name == 'es'">
+                      ({{ability.names[5].name}})
                     </ng-container>
-                    <ng-template #elseBlock>
-                      <td style="text-align: center;">-</td>
-                    </ng-template>
-                    <ng-container *ngIf="ability.pokemon; else elseBlock">
-                      <td>{{'Ej: ' + ability.pokemon[0].pokemon.name}}</td>
-                    </ng-container>
-                    <ng-template #elseBlock>
-                      <td style="text-align: center;">-</td>
-                    </ng-template>
-                </tr>
-            </ng-template>
-        </p-table>
-    </ng-container>
+                  </ng-container>
+                  <ng-template #elseName>
+                    <p style="text-align: center;">-</p>
+                  </ng-template>
+                  </td>
+                  <ng-container *ngIf="ability.effect_entries[1]; else elseEffect">
+                    <td>{{ability.effect_entries[1].effect}}</td>
+                  </ng-container>
+                  <ng-template #elseEffect>
+                    <td style="text-align: center;">-</td>
+                  </ng-template>
+                  <ng-container *ngIf="ability.pokemon[0]; else elsePokeExample">
+                    <td>{{'Ej: ' + ability.pokemon[0].pokemon.name}}</td>
+                  </ng-container>
+                  <ng-template #elsePokeExample>
+                    <td style="text-align: center;">-</td>
+                  </ng-template>
+              </tr>
+          </ng-template>
+      </p-table>
+  </ng-container>
+  <app-spinner *ngIf="loading"></app-spinner>
 </div>

@@ -49,6 +49,7 @@ export class PokeListComponent {
   }
 
   getPokemons() {
+    this.pokemons = [];
     // GET POKEMON LIST
     this.pokedexService.getPokeList(this.itemsPerPage, this.page -1)
     .subscribe((result$: any) => {
