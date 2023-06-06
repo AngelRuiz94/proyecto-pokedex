@@ -17,7 +17,7 @@ export class PokeListComponent {
   pokemonId?: number;
   pokemons: any[] = [];
   page: number = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 12;
   totalPokemons: number;
   color: string;
 

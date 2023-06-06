@@ -1,8 +1,8 @@
 <app-navigation></app-navigation>
-<div class="container" *ngIf="pokemon">
+<div class="container">
   <div class="p-col">
     <div class="cards">
-      <p-card *ngFor="let nat of natures" header={{nat.name}}>
+      <p-card *ngFor="let nat of natures" header={{getUpperCase(nat.name)}}>
         <div style="background-color:green; color:white" *ngIf="nat.decreased_stat == null && nat.increased_stat == null; else elseStat">
           Neutral
         </div>

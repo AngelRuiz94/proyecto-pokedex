@@ -13,14 +13,10 @@
           </ng-template>
           <ng-template pTemplate="body" let-ability>
               <tr>
-                <!-- <td>{{ ability.id }}</td>
-                <td>{{ ability.name }} ({{ ability.name_es }})</td>
-                <td>{{ ability.effect }}</td>
-                <td>{{ ability.pokemon }}</td> -->
                   <td>{{ability.id}}</td>
                   <td>
                   <ng-container *ngIf="ability.name; else elseName">
-                    {{ability.name}}
+                    {{getUpperCase(ability.name)}}
                     <ng-container *ngIf="ability.names[3] && ability.names[3].language.name == 'es'">
                       ({{ability.names[3].name}})
                     </ng-container>
@@ -39,7 +35,7 @@
                     <td style="text-align: center;">-</td>
                   </ng-template>
                   <ng-container *ngIf="ability.pokemon[0]; else elsePokeExample">
-                    <td>{{'Ej: ' + ability.pokemon[0].pokemon.name}}</td>
+                    <td>{{'Ej: ' + getUpperCase(ability.pokemon[0].pokemon.name)}}</td>
                   </ng-container>
                   <ng-template #elsePokeExample>
                     <td style="text-align: center;">-</td>

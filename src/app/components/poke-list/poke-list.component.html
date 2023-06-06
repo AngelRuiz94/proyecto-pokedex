@@ -9,7 +9,7 @@
           <p>
             <b>Type:</b> {{pokemon.types[0].type.name}}
             <ng-container *ngIf="pokemon.types[1]" !="null">
-              {{pokemon.types[1].type.name}}
+              {{"/ " + pokemon.types[1].type.name}}
             </ng-container>
           </p>
         </div>

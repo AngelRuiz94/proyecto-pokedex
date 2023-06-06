@@ -19,7 +19,7 @@
       </div>
 
       <div class="p-col-8 inline-block">
-        <div class="cosas">
+        <div class="info">
           <div class="grid">
             <ng-container *ngIf="pokemon.types.length != 1; else elseBlock">
               <td>
@@ -36,8 +36,8 @@
                 </ng-container>
               </td>
             </ng-template>
-            <td>Height: {{ pokemon.height }}</td>
-            <td>Weight: {{ pokemon.weight }}</td>
+            <td>Height: {{ pokemon.height / 10 }} m</td>
+            <td>Weight: {{ pokemon.weight / 10 }} kg</td>
             <ng-container *ngFor="let ab of abilities">
               <ng-container *ngIf="ab.is_hidden; else elseBlock">
                 <td>Hidden ability: {{ ab.name}}</td>
@@ -47,7 +47,7 @@
               </ng-template>
             </ng-container>
           </div>
-          <div class="cosas3">
+          <div class="graphic">
             <div id="container" style="width: 600px; height: 250px;" #container></div>
           </div>
       </div>

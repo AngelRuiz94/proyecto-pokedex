@@ -14,8 +14,8 @@ import { Nature } from 'src/app/interfaces/nature';
 })
 export class PokeNatureComponent {
 
-  pokemon?: Pokemon;
-  pokemonId?: number;
+  // pokemon?: Pokemon;
+  // pokemonId?: number;
   naturelist?: PokeNature[] = [];
   natures?: Nature[] = [];
 
@@ -37,26 +37,21 @@ export class PokeNatureComponent {
       // GET NATURE LIST
     this.pokedexService.getNature().subscribe(
       result$ => {
+        this.natures = [];
         this.naturelist = result$.results;
         console.log(this.naturelist);
-        this.getNatureToList();
       }
     );
   }
 
   ngOnInit(): void {
-    this.getPokemonId(25);
-  }
-
-  // Pasándole un ID
-  getPokemonId(id: number): void {
-    this.pokedexService.getPokemonId(id).subscribe(
-      pokemon => this.pokemon = pokemon
-      );
+    setTimeout(() => {
+      this.getNatureToList();
+    }, 100);
   }
 
   getNatureToList(): void {
-    this.natures = [];
+    console.log('Reinicia el nature');
     for (let pokeNat of this.naturelist) {
       if (pokeNat.url) {
         this.pokedexService.getNatureToList(pokeNat.url).subscribe(
@@ -67,7 +62,13 @@ export class PokeNatureComponent {
         )
       }
     }
-    console.log(this.natures);
+    this.natures = this.natures.sort((a, b) => a.id - b.id);
+    console.log('Natures ',this.natures);
+  }
+
+  getUpperCase(stat: string) {
+    let statUpperCase: string = stat.charAt(0).toUpperCase() + stat.slice(1)
+    return statUpperCase;
   }
 
 }

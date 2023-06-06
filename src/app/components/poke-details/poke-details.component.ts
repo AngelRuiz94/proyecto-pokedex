@@ -82,6 +82,9 @@ export class PokeDetailsComponent {
       title: {
         text: pokemon.name
       },
+      legend: {
+        enabled: false
+      },
       plotOptions: {
         column: {
           pointPadding: 0.2,
@@ -102,6 +105,11 @@ export class PokeDetailsComponent {
           'Sp. Defense',
           'Speed'
         ]
+      },
+      yAxis: {
+        title: {
+          text: ""
+        }
       },
       credits: {
         enabled: false

@@ -40,8 +40,9 @@ export class PokeAbilitiesComponent {
     setTimeout(() => {
       this.pokedexService.getAbility().subscribe(
         result$ => {
-          // this.totalAbilities = result$.count;
-          this.totalAbilities = 298;
+          this.abilities = [];
+          console.log('Reinicia el ability');
+          this.totalAbilities = result$.count;
           result$.results.forEach((result$: any) => {
             this.pokedexService.getAbilityToList(result$.name)
             .subscribe((oneResult$) =>{
@@ -49,9 +50,15 @@ export class PokeAbilitiesComponent {
             })
           });
           this.abilities = this.abilities.sort((a, b) => a.id - b.id);
-          console.log(this.abilities);
+          console.log('Abilities ',this.abilities);
         }
       )
-    }, 1000);
+    }, 100);
   }
+
+  getUpperCase(stat: string) {
+    let statUpperCase: string = stat.charAt(0).toUpperCase() + stat.slice(1)
+    return statUpperCase;
+  }
+
 }
